@@ -4,7 +4,7 @@ KLIPPER=~/klipper
 
 function _help() {
   ret=${1:-0}
-  echo "run $0 [ercf|ebb36|octopus] [make|flash|all]"
+  echo "run $0 [ercf|ebb36|octopus|xiao] [make|flash|config|all]"
   exit $ret
 }
 
@@ -33,6 +33,9 @@ function _flash() {
       binary=$(ls -1 $KLIPPER/out/klipper.* | grep -e bin -e uf2)
       python3 ./flash_can.py -i can0 -f $binary -u $UUID
       ;;
+    xiao)
+      /usr/local/bin/bossac -i -d -p /dev/ttyACM0 -e -w -v -R --offset=0x2000 out/klipper.bin
+      ;;
     *)
       echo other
       ;;
@@ -52,6 +55,9 @@ case $1 in
     ;;
   octopus)
     DEVICE=octopus
+    ;;
+  xiao)
+    DEVICE=xiao
     ;;
   *)
     echo "invalid device \"$1\""
