@@ -4,7 +4,7 @@ KLIPPER=~/klipper
 
 function _help() {
   ret=${1:-0}
-  echo "run $0 [ercf|ebb36|octopus|xiao] [make|flash|config|all]"
+  echo "run $0 [ercf|ebb36|octopus|skrpico|xiao] [make|flash|config|all]"
   exit $ret
 }
 
@@ -58,6 +58,9 @@ case $1 in
     ;;
   xiao)
     DEVICE=xiao
+    ;;
+  skrpico)
+    DEVICE=skrpico
     ;;
   *)
     echo "invalid device \"$1\""
